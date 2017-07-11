@@ -67,7 +67,7 @@ let species = ""
 const start = (race) => {
 	species = race;
 	const Factory = new alienFactory(race)
-	for(i=0; i<1; i++) {
+	for(i=0; i<8; i++) {
 		Factory.generateShip()
 	}
 	aliens = Factory.ships
@@ -116,6 +116,7 @@ const nextTurn = () => {
 			}
 			if(player.hull <=0) {
 				console.log("%c You lose", "font-size:40px; color: red")
+				window.location.replace("lose.html")
 				return
 			}
 
@@ -129,6 +130,7 @@ const nextTurn = () => {
 	}
 	else {
 		console.log("%c You lose!", "font-size:40px; color: red")
+		window.location.replace("lose.html")
 		return
 	}
 }
