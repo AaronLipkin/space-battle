@@ -1,0 +1,86 @@
+body {
+	background: url("https://wallpapershome.com/images/pages/pic_hs/10121.jpg") no-repeat center center fixed;
+	background-size: cover;
+	text-align: center;
+}
+
+.play {
+	width: 10%;
+	position: absolute;
+	right: 10px;
+	display: block;
+	top: 50%;
+	margin-top: -70px;
+}
+
+.buttons {
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+}
+
+.button-img {
+	width: 200px;
+}
+
+.title {
+	width: 80%;
+	display: block;
+	margin: 60px auto;
+}
+
+h1 {
+	color: white;
+	font-family: arial black;
+	text-shadow:
+   -2px -2px 0 #000,  
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+     2px 2px 0 #000;
+}
+
+p {
+	color: white;
+	font-family: helvetica;
+	font-weight: normal;
+	margin: 0px auto;
+	max-width:70%;
+	line-height: 1.7;
+	font-size: 19px;
+	text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+
+@media(max-width: 1200px) {
+	p {
+		font-size: 1.6vw;
+	}
+}
+
+.enemy {
+	font-weight: bold;
+	text-shadow:
+   -1px -1px 0 red,  
+    1px -1px 0 red,
+    -1px 1px 0 red,
+     1px 1px 0 red;
+}
+
+.win {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+}
+
+.play-again {
+	width: 40%;
+	position: absolute;
+	bottom: 10%;
+	left: 50%;
+	transform:translateX(-50%);
+}
