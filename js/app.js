@@ -71,7 +71,7 @@ const start = (race) => {
 		Factory.generateShip()
 	}
 	aliens = Factory.ships
-	console.log("%c SPACEBATTLE", "font-size:40px; color:purple; font-weight:bold; text-align: center")
+	console.log("%c SPACEBATTLE BEGIN", "font-size:40px; color:purple; font-weight:bold; text-align: center")
 	nextTurn()
 }
 
@@ -84,19 +84,18 @@ const nextTurn = () => {
 	let nextShip = aliens.shift()
 	console.log("You:", player)
 	console.log(species + ":", nextShip)
-	let move = prompt("Would you like to attack or retreat?", "Attack | Repair | Retreat")
-	while(move !== "Attack" && move !== "Repair" && move !== "Retreat" && move != null) {
-		move = prompt("Try again!", "Attack | Repair | Retreat")
+	let move = prompt("Would you like to attack or retreat?", "Attack | Repair | Retreat").toLowerCase()
+	while(move !== "attack" && move !== "repair" && move !== "retreat" && move != null) {
+		move = prompt("Try again!", "Attack | Repair | Retreat").toLowerCase()
 	}
-	console.log(move)
-	while(move==="Repair") {
+	while(move==="repair") {
 		player.repair()	
 		move = prompt("Now what?", "Attack | Repair | Retreat")
 	}
-	while(move !== "Attack" && move !== "Repair" && move !== "Retreat" && move != null) {
+	while(move !== "attack" && move !== "repair" && move !== "retreat" && move != null) {
 		move = prompt("Try again!", "Attack | Repair | Retreat")
 	}
-	if(move==="Attack") {
+	if(move==="attack") {
 		while(player.hull > 0 && nextShip.hull > 0) {
 			if(player.attack()) {
 				nextShip.hull-=player.firepower
@@ -129,8 +128,6 @@ const nextTurn = () => {
 		nextTurn()
 	}
 	else {
-		console.log("%c You lose!", "font-size:40px; color: red")
-		window.location.replace("lose.html")
 		return
 	}
 }
