@@ -10,9 +10,9 @@ function getRandomInt(min, max) {
 
 class spaceShip {
 	constructor(hull,firepower,accuracy) {
-		this.hull = hull
-		this.firepower = firepower
-		this.accuracy = accuracy
+		this.hull = hull;
+		this.firepower = firepower;
+		this.accuracy = accuracy;
 	}
 	attack() {
 		if(Math.random() < this.accuracy) {
@@ -24,34 +24,34 @@ class spaceShip {
 	}
 	repair() {
 		if(this.repairKits > 0) {
-			this.repairKits--
-			this.hull+=6
-			console.log("%c You've repaired six hull points!", "font-size: 20px; color:purple")
+			this.repairKits--;
+			this.hull+=6;
+			console.log("%c You've repaired six hull points!", "font-size: 20px; color:purple");
 		}
 		else {
-			console.log("%c No Repair Kits", "color:red")
+			console.log("%c No Repair Kits", "color:red");
 		}
 	}
 }
 
 class alienFactory {
 	constructor(race) {
-		this.race = race
-		this.ships = []
+		this.race = race;
+		this.ships = [];
 	}
 	generateShip(){
 		if(this.race === "Romulan") {
-			this.accuracy = getRandomArbitrary(.7,.9)
-			this.firepower = getRandomInt(2,4)
-			this.hull = getRandomInt(3,7)
+			this.accuracy = getRandomArbitrary(.7,.9);
+			this.firepower = getRandomInt(2,4);
+			this.hull = getRandomInt(3,7);
 			const newShip = new spaceShip(this.hull, this.firepower,this.accuracy);
 			this.ships.push(newShip);
 			return newShip;
 		}
 		else if(this.race === "Klingon") {
-			this.accuracy = getRandomArbitrary(.4,.6)
-			this.firepower = getRandomInt(3,5)
-			this.hull = getRandomInt(6,9)
+			this.accuracy = getRandomArbitrary(.4,.6);
+			this.firepower = getRandomInt(3,5);
+			this.hull = getRandomInt(6,9);
 			const newShip = new spaceShip(this.hull, this.firepower,this.accuracy);
 			this.ships.push(newShip);
 			return newShip;
@@ -60,74 +60,74 @@ class alienFactory {
 }
 
 
-const player = new spaceShip(20,5,.7)
+const player = new spaceShip(20,5,.7);
 player.repairKits = 0;
-let aliens = null
-let species = ""
+let aliens = null;
+let species = "";
 const start = (race) => {
 	species = race;
-	const Factory = new alienFactory(race)
+	const Factory = new alienFactory(race);
 	for(i=0; i<8; i++) {
-		Factory.generateShip()
+		Factory.generateShip();
 	}
-	aliens = Factory.ships
-	console.log("%c SPACEBATTLE BEGIN", "font-size:40px; color:purple; font-weight:bold; text-align: center")
-	nextTurn()
+	aliens = Factory.ships;
+	console.log("%c SPACEBATTLE BEGIN", "font-size:40px; color:purple; font-weight:bold; text-align: center");
+	nextTurn();
 }
 
 const nextTurn = () => {
 	if (aliens.length === 0) {
-		console.log("%c You win!", "font-size:40px; color: green")
-		window.location.replace("win.html")
-		return
+		console.log("%c You win!", "font-size:40px; color: green");
+		window.location.replace("win.html");
+		return;
 	}
-	let nextShip = aliens.shift()
-	console.log("You:", player)
-	console.log(species + ":", nextShip)
-	let move = prompt("Would you like to attack or retreat?", "Attack | Repair | Retreat").toLowerCase()
+	let nextShip = aliens.shift();
+	console.log("You:", player);
+	console.log(species + ":", nextShip);
+	let move = prompt("Would you like to attack or retreat?", "Attack | Repair | Retreat").toLowerCase();
 	while(move !== "attack" && move !== "repair" && move !== "retreat" && move != null) {
-		move = prompt("Try again!", "Attack | Repair | Retreat").toLowerCase()
+		move = prompt("Try again!", "Attack | Repair | Retreat").toLowerCase();
 	}
 	while(move==="repair") {
-		player.repair()	
-		move = prompt("Now what?", "Attack | Repair | Retreat")
+		player.repair()	;
+		move = prompt("Now what?", "Attack | Repair | Retreat");
 	}
 	while(move !== "attack" && move !== "repair" && move !== "retreat" && move != null) {
-		move = prompt("Try again!", "Attack | Repair | Retreat")
+		move = prompt("Try again!", "Attack | Repair | Retreat");
 	}
 	if(move==="attack") {
 		while(player.hull > 0 && nextShip.hull > 0) {
 			if(player.attack()) {
-				nextShip.hull-=player.firepower
-				console.log("%c Player hits!",'color: green')
+				nextShip.hull-=player.firepower;
+				console.log("%c Player hits!",'color: green');
 			}
 			else {
-				console.log("%c Player misses!", 'color: red')
+				console.log("%c Player misses!", 'color: red');
 			}
 			if(nextShip.hull > 0) {
 				if(nextShip.attack()) {
-					player.hull-=nextShip.firepower
-					console.log("%c Alien hits!", 'color: red')
+					player.hull-=nextShip.firepower;
+					console.log("%c Alien hits!", 'color: red');
 				}
 				else {
-					console.log("%c Alien misses!", 'color: green')
+					console.log("%c Alien misses!", 'color: green');
 				}
 			}
 			if(player.hull <=0) {
-				console.log("%c You lose", "font-size:40px; color: red")
-				window.location.replace("lose.html")
+				console.log("%c You lose", "font-size:40px; color: red");
+				window.location.replace("lose.html");
 				return
 			}
 
 		}
-		console.log("%c The Alien Ship is Destroyed!", "font-size: 20px; color:green")
+		console.log("%c The Alien Ship is Destroyed!", "font-size: 20px; color:green");
 		if(Math.random()<.3) {
-			player.repairKits++
-			console.log("%c You found a repair kit!", "font-size: 20px; color:green")
+			player.repairKits++;
+			console.log("%c You found a repair kit!", "font-size: 20px; color:green");
 		}
-		nextTurn()
+		nextTurn();
 	}
 	else {
-		return
+		return;
 	}
 }
